@@ -1,0 +1,14 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="application::html">
+</html>
+
+<main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="main" th:remove="all">
+
+    <div class="mdl-cell mdl-cell--12-col">
+        <h2 th:text="#{root.index.welcome}"></h2>
+    </div>
+</main>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org"
+      th:fragment="html">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title th:text="#{core.title}"></title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
+    <link rel="stylesheet" href="/css/material-icon.css" />
+    <link rel="stylesheet" href="/css/application.css" />
+    <style th:include="::style"></style>
+
+    <script src="https://code.getmdl.io/1.3.0/material.min.js" th:defer="true"></script>
+    <script src="/js/mdl-select.js"></script>
+    <script src="/js/application.js"></script>
+    <script th:inline="javascript" th:include="::script"></script>
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-navigation">
+                <div sec:authorize="isAuthenticated()">
+                    <form method="post" th:action="@{/signOut}">
+                        <input type="submit" class="mdl-button mdl-js-button" th:value="#{core.signOut}" />
+                    </form>
+                </div>
+
+                <div sec:authorize="isAnonymous()">
+                    <a class="mdl-button mdl-js-button" th:href="@{/signIn}" th:text="#{core.signIn}"></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mdl-layout__drawer">
+        <h1 class="mdl-layout-title">
+            <a th:href="@{/}" th:text="#{core.title}"></a>
+        </h1>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" th:href="@{'/' + ${#authentication.principal.user.username}}"
+               th:text="#{core.userInfo}" sec:authorize="isAuthenticated()"></a>
+            <a class="mdl-navigation__link" th:href="@{/problem}" th:text="#{core.problem}"></a>
+            <a class="mdl-navigation__link" th:href="@{/submit}" th:text="#{core.submit}"></a>
+        </nav>
+    </div>
+
+    <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid page-content" th:include="::main">
+
+        </div>
+    </main>
+
+    <footer class="mdl-mini-footer">
+
+    </footer>
+</div>
+</body>
+</html>

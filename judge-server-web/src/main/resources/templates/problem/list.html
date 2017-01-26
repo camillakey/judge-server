@@ -1,0 +1,28 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="application::html">
+</html>
+
+<main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="main" th:remove="all">
+
+    <div class="mdl-cell mdl-cell--12-col">
+        <div th:include="fragment::paginate('/problem', ${problemList})"></div>
+        <table class="mdl-data-table mdl-js-data-table mdl-textfield--full-width mdl-shadow--2dp">
+            <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric" th:text="#{core.problem}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="problem : ${problemList.content}">
+                <td class="mdl-data-table__cell--non-numeric">
+                    <a th:href="@{'/problem/' + ${problem.problemId}}" th:text="${problem.title}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

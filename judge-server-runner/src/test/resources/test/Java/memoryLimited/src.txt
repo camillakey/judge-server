@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+public class Src {
+    public static void main(String[] args) {
+        int[][] array = new int[20000][2000];
+
+        Scanner scanner = new Scanner(System.in);
+
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+
+        scanner.close();
+
+        System.out.println(a + b);
+    }
+}

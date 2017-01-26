@@ -1,0 +1,102 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="application::html">
+</html>
+
+<script xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="script" th:remove="all">
+/*<![CDATA[>*/
+
+    var inputText = /*[[ #{core.input} ]]*/ 'Input';
+    var outputText = /*[[ #{core.output} ]]*/ 'Output';
+    var ioCount = 0;
+
+    function onLoad() {
+        appendJudgeIO();
+
+        document.querySelector('.append-judge-io').addEventListener('click', function () {
+            appendJudgeIO();
+        });
+    }
+
+    function appendJudgeIO() {
+        var div = document.createElement('div');
+        div.className = 'mdl-grid';
+        div.innerHTML = '<div class="mdl-cell mdl-cell--6-col">'
+                + '  <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">'
+                + '    <textarea id="input' + ioCount + '" name="input" rows= "10"'
+                + '              spellcheck="false" class="mdl-textfield__input"></textarea>'
+                + '    <label for="input' + ioCount + '" class="mdl-textfield__label">' + inputText + '</label>'
+                + '  </div>'
+                + '</div>'
+                + '<div class="mdl-cell mdl-cell--6-col">'
+                + '  <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">'
+                + '    <textarea id="output' + ioCount + '" name="output" rows= "10"'
+                + '              spellcheck="false" class="mdl-textfield__input"></textarea>'
+                + '    <label for="output' + ioCount + '" class="mdl-textfield__label">' + outputText + '</label>'
+                + '  </div>'
+                + '</div>';
+
+        document.querySelector('#judgeSystemSimpleForm').appendChild(div);
+        ioCount++;
+
+        componentHandler.upgradeDom();
+    }
+
+/*]]>*/
+</script>
+
+<main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="main" th:remove="all">
+
+    <form method="post" th:action="@{/problem/create/simple}">
+        <input name="judgeSystem" type="hidden" value="Simple" />
+
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col mdl-typography--text-right">
+                <input type="submit" class="mdl-button mdl-js-button" th:value="#{core.create}" />
+            </div>
+
+            <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                    <input id="problemId" name="problemId" type="text" class="mdl-textfield__input" />
+                    <label for="problemId" class="mdl-textfield__label" th:text="#{core.problem.problemId}"></label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                    <input id="timeLimit" name="timeLimit" type="number" class="mdl-textfield__input" />
+                    <label for="timeLimit" class="mdl-textfield__label" th:text="#{core.timeLimit}"></label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                    <input id="memoryLimit" name="memoryLimit" type="number" class="mdl-textfield__input" />
+                    <label for="memoryLimit" class="mdl-textfield__label" th:text="#{core.memoryLimit}"></label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                    <input id="title" name="title" type="text" class="mdl-textfield__input" />
+                    <label for="title" class="mdl-textfield__label" th:text="#{core.problem.title}"></label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                <textarea id="detail" name="detail" rows= "20"
+                          spellcheck="false" class="mdl-textfield__input"></textarea>
+                    <label for="detail" class="mdl-textfield__label" th:text="#{core.problem.detail}"></label>
+                </div>
+            </div>
+
+            <div class="mdl-cell mdl-cell--6-col">
+                <div id="judgeSystemSimpleForm">
+                </div>
+
+                <div class="mdl-typography--text-right">
+                    <button type="button" class="mdl-button mdl-js-button append-judge-io"
+                            th:text="#{core.append}"></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>

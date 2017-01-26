@@ -1,0 +1,4 @@
+dependencies {
+    compile project(':judge-server-core')
+    compile project(':judge-server-runner')
+}

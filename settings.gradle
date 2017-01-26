@@ -1,0 +1,7 @@
+include 'judge-server-core'
+
+include 'judge-server-judge'
+include 'judge-server-runner'
+include 'judge-server-sandbox'
+
+include 'judge-server-web'

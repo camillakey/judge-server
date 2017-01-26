@@ -1,0 +1,32 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="application::html">
+</html>
+
+<main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="main" th:remove="all">
+
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--3-offset">
+        <form method="post" th:action="@{/signIn}">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                <input id="email" name="email" type="email" class="mdl-textfield__input" />
+                <label for="email" class="mdl-textfield__label" th:text="#{core.email}"></label>
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                <input id="password" name="password" type="password" class="mdl-textfield__input" />
+                <label for="password" class="mdl-textfield__label" th:text="#{core.password}"></label>
+            </div>
+
+            <div class="mdl-typography--text-right">
+                <input type="submit" class="mdl-button mdl-js-button" th:value="#{core.signIn}" />
+            </div>
+        </form>
+
+        <div class="mdl-typography--text-center">
+            <a th:href="@{/signUp}" th:text="#{authentication.signUp.message}"></a>
+        </div>
+    </div>
+</main>

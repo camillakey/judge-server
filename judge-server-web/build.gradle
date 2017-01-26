@@ -1,0 +1,9 @@
+dependencies {
+	compile project(':judge-server-core')
+	compile project(':judge-server-judge')
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	compile 'org.springframework.boot:spring-boot-starter-security'
+	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
+	testCompile 'org.springframework.security:spring-security-test'
+}

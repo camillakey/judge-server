@@ -1,0 +1,14 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="application::html">
+</html>
+
+<main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="main" th:remove="all">
+    <div class="mdl-cell mdl-cell--12-col">
+        <div th:include="fragment::paginate('/submit', ${submitList})"></div>
+        <div th:include="fragment::submit(${submitList})"></div>
+    </div>
+</main>

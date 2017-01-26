@@ -1,0 +1,91 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="application::html">
+</html>
+
+<style xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       th:fragment="style" th:remove="all">
+
+    .submit-dialog {
+        width: 60%;
+    }
+</style>
+
+<script xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="script" th:remove="all">
+
+    function onLoad() {
+        var dialog = document.querySelector('dialog');
+        var showDialogButton = document.querySelector('#show-dialog');
+        if (! dialog.showModal) {
+            dialogPolyfill.registerDialog(dialog);
+        }
+
+        showDialogButton.addEventListener('click', function() {
+            dialog.showModal();
+        });
+
+        dialog.querySelector('.close').addEventListener('click', function() {
+            dialog.close();
+        });
+    }
+</script>
+
+<main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="main" th:remove="all">
+
+    <div class="mdl-cell mdl-cell--10-col">
+        <div th:text="${problem.problemId}"></div>
+        <h3 th:text="${problem.title}"></h3>
+        <div th:text="#{core.timeLimit} + #{core.separator} + #{core.time.ms(${problem.timeLimit})}"></div>
+        <div th:text="#{core.memoryLimit} + #{core.separator} + #{core.memory.kb(${problem.memoryLimit})}"></div>
+    </div>
+
+    <div class="mdl-cell mdl-cell--2-col">
+        <div class="mdl-typography--text-right">
+            <button id="show-dialog" type="button" class="mdl-button" th:text="#{core.submit}"></button>
+        </div>
+
+        <dialog class="mdl-dialog submit-dialog">
+            <h4 class="mdl-dialog__title" th:text="#{core.submit}"></h4>
+
+            <form method="post" th:action="@{'/submit/' + ${problem.problemId}}">
+                <div class="mdl-dialog__content">
+                    <div class="mdl-select">
+                        <select id="language" name="language" class="mdl-select__select">
+                            <option class="mdl-select__item" value="C"
+                                    th:text="#{core.program.language.c}"></option>
+                            <option class="mdl-select__item" value="Cpp"
+                                    th:text="#{core.program.language.cpp}"></option>
+                            <option class="mdl-select__item" value="Java"
+                                    th:text="#{core.program.language.java}"></option>
+                        </select>
+                        <label for="language" th:text="#{core.program.language}"></label>
+                    </div>
+
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                        <textarea id="source" name="source" rows= "20"
+                                  spellcheck="false" class="mdl-textfield__input"></textarea>
+                        <label for="source" class="mdl-textfield__label" th:text="#{core.program.source}"></label>
+                    </div>
+                </div>
+
+                <div class="mdl-dialog__actions">
+                    <div class="mdl-typography--text-right">
+                        <button type="button" class="mdl-button mdl-js-button close"
+                                th:text="#{core.dialog.close}"></button>
+                        <input type="submit" class="mdl-button mdl-js-button" th:value="#{core.submit}" />
+                    </div>
+                </div>
+            </form>
+        </dialog>
+    </div>
+
+    <div class="mdl-cell mdl-cell--12-col">
+        <div th:utext="${problem.detail}"></div>
+    </div>
+</main>

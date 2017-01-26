@@ -1,0 +1,27 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="application::html">
+</html>
+
+<main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="main" th:remove="all">
+
+    <div class="mdl-cell mdl-cell--12-col">
+        <table class="mdl-data-table mdl-js-data-table mdl-textfield--full-width mdl-shadow--2dp">
+            <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric" th:text="#{core.problem.judgeSystem}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                    <a th:href="@{/problem/create/simple}" th:text="#{core.problem.judgeSystem.simple}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

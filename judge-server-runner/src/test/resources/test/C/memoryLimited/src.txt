@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    int* array;
+    int a, b;
+
+    array = malloc(sizeof(int) * 20000 * 2000);
+    free(array);
+
+    scanf("%d %d", &a, &b);
+    printf("%d\n", a + b);
+}

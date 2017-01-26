@@ -1,0 +1,45 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="application::html">
+</html>
+
+<main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org"
+      th:fragment="main" th:remove="all">
+
+    <div class="mdl-cell mdl-cell--12-col">
+        <ul class="mdl-list">
+            <li class="mdl-list__item mdl-list__item--two-line">
+                <span class="mdl-list__item-primary-content">
+                    <span th:text="${user.username}"></span>
+                    <span class="mdl-list__item-sub-title" th:text="#{core.username}"></span>
+                </span>
+            </li>
+
+            <li class="mdl-list__item mdl-list__item--two-line">
+                <span class="mdl-list__item-primary-content">
+                    <span th:text="${user.email}"></span>
+                    <span class="mdl-list__item-sub-title" th:text="#{core.email}"></span>
+                </span>
+            </li>
+
+            <li class="mdl-list__item mdl-list__item--two-line">
+                <span class="mdl-list__item-primary-content">
+                    <span>
+                        <a th:href="@{'/' + ${user.username} + '/submit'}" th:text="#{core.submit}"></a>
+                    </span>
+                    <span class="mdl-list__item-sub-title" th:text="#{user.userSubmit.message}"></span>
+                </span>
+            </li>
+
+            <li class="mdl-list__item mdl-list__item--two-line" sec:authorize="hasRole('ROLE_ADMIN')">
+                <span class="mdl-list__item-primary-content">
+                    <span><a th:href="@{/problem/create}" th:text="#{user.createProblem}"></a></span>
+                    <span class="mdl-list__item-sub-title" th:text="#{user.createProblem.message}"></span>
+                </span>
+            </li>
+        </ul>
+    </div>
+</main>

@@ -1,0 +1,11 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(void) {
+    vector<vector<int> > array(20000, vector<int>(2000, 0));
+    int a, b;
+    cin >> a >> b;
+    cout << a + b << endl;
+}

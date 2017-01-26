@@ -1,0 +1,88 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:th="http://www.thymeleaf.org"
+     th:fragment="paginate(url, page)">
+
+    <a class="mdl-button mdl-js-button" th:href="@{${url} + '?page=' + ${page.number - 1}}" th:unless="${page.first}">
+        <i class="material-icons">chevron_left</i>
+    </a>
+    <span class="mdl-button mdl-js-button" th:if="${page.first}">
+        <i class="material-icons md-inactive">chevron_left</i>
+    </span>
+
+    <a class="mdl-button mdl-js-button" th:href="@{${url} + '?page=' + ${page.number + 1}}" th:unless="${page.last}">
+        <i class="material-icons">chevron_right</i>
+    </a>
+    <span class="mdl-button mdl-js-button" th:if="${page.last}">
+        <i class="material-icons md-inactive">chevron_right</i>
+    </span>
+</div>
+
+
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:th="http://www.thymeleaf.org"
+     th:fragment="submit(submitList)">
+
+    <table class="mdl-data-table mdl-js-data-table mdl-textfield--full-width mdl-shadow--2dp">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric" th:text="#{core.username}"></th>
+            <th class="mdl-data-table__cell--non-numeric" th:text="#{core.problem}"></th>
+            <th th:text="#{core.program.language}"></th>
+            <th th:text="#{core.submitState}"></th>
+            <th th:text="#{core.usedTime}"></th>
+            <th th:text="#{core.usedMemory}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="submit : ${submitList.content}">
+            <td class="mdl-data-table__cell--non-numeric">
+                <a th:href="@{'/' + ${submit.user.username}}" th:text="${submit.user.username}"></a>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+                <a th:href="@{'/problem/' + ${submit.problem.problemId}}"
+                   th:text="${submit.problem.problemId}"></a>
+            </td>
+            <td th:switch="${submit.language}">
+                <span th:case="${T(com.judge_server.core.entity.judge.Language).C}"
+                      th:text="#{core.program.language.c}"></span>
+
+                <span th:case="${T(com.judge_server.core.entity.judge.Language).Cpp}"
+                      th:text="#{core.program.language.cpp}"></span>
+
+                <span th:case="${T(com.judge_server.core.entity.judge.Language).Java}"
+                      th:text="#{core.program.language.java}"></span>
+            </td>
+            <td th:switch="${submit.submitState}">
+                <span th:case="${T(com.judge_server.core.entity.judge.SubmitState).JudgeError}"
+                      th:text="#{core.submitState.judgeError}"></span>
+
+                <span th:case="${T(com.judge_server.core.entity.judge.SubmitState).Waiting}"
+                      th:text="#{core.submitState.waiting}"></span>
+
+                <span th:case="${T(com.judge_server.core.entity.judge.SubmitState).CompileError}"
+                      th:text="#{core.submitState.compileError}"></span>
+
+                <span th:case="${T(com.judge_server.core.entity.judge.SubmitState).Running}"
+                      th:text="#{core.submitState.running}"></span>
+
+                <span th:case="${T(com.judge_server.core.entity.judge.SubmitState).RuntimeError}"
+                      th:text="#{core.submitState.runtimeError}"></span>
+
+                <span th:case="${T(com.judge_server.core.entity.judge.SubmitState).MemoryLimited}"
+                      th:text="#{core.submitState.memoryLimited}"></span>
+
+                <span th:case="${T(com.judge_server.core.entity.judge.SubmitState).TimeLimited}"
+                      th:text="#{core.submitState.timeLimited}"></span>
+
+                <span th:case="${T(com.judge_server.core.entity.judge.SubmitState).Rejected}"
+                      th:text="#{core.submitState.rejected}"></span>
+
+                <span th:case="${T(com.judge_server.core.entity.judge.SubmitState).Accepted}"
+                      th:text="#{core.submitState.accepted}"></span>
+            </td>
+            <td th:text="#{core.disabled}"></td>
+            <td th:text="#{core.disabled}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
